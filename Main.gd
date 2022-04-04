@@ -1,11 +1,13 @@
 extends Node
 
 export(PackedScene) var mob_scene
+export(PackedScene) var mob_scene_2
 var score
+var rng = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	randomize()
+	rng.randomize()
 	new_game()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -26,11 +28,17 @@ func new_game():
 func _on_MobTimer_timeout():
 	#picking where on path to spawn them
 	var mob_spawn_location = get_node("MobPath/MobSpawnLocation")
-	mob_spawn_location.offset = randi()
+	mob_spawn_location.offset = rng.randi()
 	
-	#adding it
-	var mob = mob_scene.instance()
-	add_child(mob)
+	#pick which and adding it
+	var which_mob = rng.randi_range(1,2)
+	var mob
+	if which_mob == 1:
+		mob = mob_scene.instance()
+		add_child(mob)
+	if which_mob == 2:
+		mob = mob_scene_2.instance()
+		add_child(mob)
 	
 	#sending it off
 	mob.position = mob_spawn_location.position

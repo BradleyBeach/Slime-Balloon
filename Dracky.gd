@@ -21,23 +21,17 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 func _physics_process(delta):
 	var space_state = get_world_2d().direct_space_state
-	var result = space_state.intersect_ray(Vector2(position.x, position.y), Vector2(-10000, position.y),[], 0b1)
+	var result = space_state.intersect_ray(Vector2(position.x, position.y), Vector2(position.x, 10000),[], 0b1)
 	#print(get_node("./Player").position.x)
 	if result:
 		shoot_Player()
 
+#"shoots" itself at player once
 func shoot_Player():
 	if canFire == true:
-		var b = EnemyBullet.instance()
-		get_parent().add_child(b)
-		b.transform = $EnemyMuzzle.global_transform
+		apply_central_impulse(Vector2(0,200))
 		canFire = false
-		get_node("CanFireAgainTimer").start()
-		#owner.add_child(b) #if we just added child, bullet moves with player, so add to world
-		#b.transform = $Muzzle.global_transform
 
-func _on_CanFireAgainTimer_timeout():
-	canFire = true
 
 
 func _on_Area2D_body_entered(body):

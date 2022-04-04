@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
-[ext_resource path="res://Drackolyte.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Dracky.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Drackolyte.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -11,7 +12,8 @@ _data = {
 
 [node name="Main" type="Node"]
 script = ExtResource( 2 )
-mob_scene = ExtResource( 3 )
+mob_scene = ExtResource( 4 )
+mob_scene_2 = ExtResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 
