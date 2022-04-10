@@ -16,6 +16,7 @@ mob_scene = ExtResource( 4 )
 mob_scene_2 = ExtResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
+scale = Vector2( 0.75, 0.75 )
 
 [node name="StartPosition" type="Position2D" parent="."]
 position = Vector2( 152.859, 152.034 )

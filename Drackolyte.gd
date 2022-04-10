@@ -28,6 +28,7 @@ func _physics_process(delta):
 
 func shoot_Player():
 	if canFire == true:
+		$AnimatedSprite.animation = "attack"
 		var b = EnemyBullet.instance()
 		get_parent().add_child(b)
 		b.transform = $EnemyMuzzle.global_transform
@@ -47,3 +48,9 @@ func _on_Area2D_body_entered(body):
 		#body.queue_free()
 		body.queue_free()
 		queue_free()
+
+
+func _on_AnimatedSprite_animation_finished():
+	if $AnimatedSprite.animation == 'attack':
+		$AnimatedSprite.animation = 'default'
+		print("back to quiet")

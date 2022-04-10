@@ -21,16 +21,18 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 func _physics_process(delta):
 	var space_state = get_world_2d().direct_space_state
-	var result = space_state.intersect_ray(Vector2(position.x, position.y), Vector2(position.x, 10000),[], 0b1)
+	#TODO - break this off into a different class so some Dracky divebomb and some target
+	#var result = space_state.intersect_ray(Vector2(position.x, position.y), Vector2(position.x, 10000),[], 0b1)
 	#print(get_node("./Player").position.x)
-	if result:
-		shoot_Player()
+	#if result:
+	#	shoot_Player()
 
+#TODO - break this off into a different class so some Dracky divebomb and some target
 #"shoots" itself at player once
-func shoot_Player():
-	if canFire == true:
-		apply_central_impulse(Vector2(0,200))
-		canFire = false
+#func shoot_Player():
+#	if canFire == true:
+#		apply_central_impulse(Vector2(0,200))
+#		canFire = false
 
 
 
@@ -41,3 +43,12 @@ func _on_Area2D_body_entered(body):
 		#body.queue_free()
 		body.queue_free()
 		queue_free()
+
+
+func _on_Area2D2_body_entered(body):
+	if canFire:
+		$AnimatedSprite.animation = 'attack'
+		var aim = (body.position - self.position)
+		apply_central_impulse(Vector2(aim))
+		canFire = false
+		
